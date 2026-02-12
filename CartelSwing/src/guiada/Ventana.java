@@ -1,5 +1,7 @@
+package guiada;
+
 import javax.swing.*;
-import java.awt.*;
+
 public class Ventana extends JFrame {
     public Ventana() {
         //como se llama la ventana

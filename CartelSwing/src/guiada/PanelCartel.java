@@ -1,10 +1,12 @@
+package guiada;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Random;
 
 public class PanelCartel extends JPanel implements ActionListener {
-    //texto
+    //variable donde se almacenara el textotexto
     String texto;
     //definicion de variables de la clase boton
     JButton btnColor;
