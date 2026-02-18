@@ -1,5 +1,6 @@
+package Ejercicios_de_Archivos;
+
 import java.io.*;
-import java.util.StringTokenizer;
 
 public class Lector_y_rescritor {
     public static void main() throws FileNotFoundException {
