@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Empresa {
     //atributos
     private String nombre;
@@ -41,5 +43,17 @@ public class Empresa {
             esDelaciudad=true;
         }
         return esDelaciudad;
+    }
+    public boolean totalPracticas(ArrayList<Practica> practicas) {
+        for (Practica p : practicas) {
+            if (nombre.equalsIgnoreCase(p.getEmpresa().getNombre()) && !p.estaActiva()) {
+
+                return true;
+
+            }
+
+        }
+        return false;
+
     }
 }

@@ -75,7 +75,13 @@ public class Centro {
     public void add_empresa(Empresa e){
         empresas.add(e);
     }
-    public void add_Practica(Practica p){
+    public void add_Practica(Practica p) throws PracticasFFEOEException {
+        for (Practica existing : practicas) {
+            if (existing.getAlumno().getNombre().equalsIgnoreCase(p.getAlumno().getNombre())
+                    && existing.estaActiva()) {
+                throw new PracticasFFEOEException("El alumno ya tiene una práctica activa.");
+            }
+        }
         practicas.add(p);
     }
     public void Listado(){
@@ -108,5 +114,34 @@ public class Centro {
         }
         return alumnosSinPractica;
     }
+    public double porcentajePracticasActivas() {
+        if (practicas.isEmpty()) return 0.0;
+        int activas = totalPracticasActivas();
+        return (activas * 100.0) / practicas.size();
+    }
+    public Empresa empresaConMasPracticas() {
+        if (practicas.isEmpty() || empresas.isEmpty()) return null;
+
+        Empresa maxEmpresa = null;
+        int maxPracticas = 0;
+
+        for (Empresa e : empresas) {
+            int contador = 0;
+
+            for (Practica p : practicas) {
+                if (p.getEmpresa().equals(e)) {
+                    contador++;
+                }
+            }
+
+            if (contador > maxPracticas) {
+                maxPracticas = contador;
+                maxEmpresa = e;
+            }
+        }
+
+        return maxEmpresa;
+    }
+
 
 }

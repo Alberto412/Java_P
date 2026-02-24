@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Alumno {
     //atributos
     private String nombre;
@@ -44,5 +46,17 @@ public class Alumno {
     public  String nombreEnMayusculas(){
         String nombreEnMayusculas=this.nombre.toUpperCase();
         return nombreEnMayusculas;
+    }
+    public boolean PracticaActiva(ArrayList<Practica> practicas) {
+        for (Practica p : practicas) {
+            if (nombre.equalsIgnoreCase(p.getAlumno().getNombre()) && !p.estaActiva()) {
+
+                    return true;
+
+            }
+
+        }
+        return false;
+
     }
 }

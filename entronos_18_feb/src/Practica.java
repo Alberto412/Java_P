@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 public class Practica {
     //atributos
     private String estado;
@@ -72,15 +76,36 @@ public class Practica {
         }
         else return false;
     }
-    public  void iniciar(){
-        this.estado="ACTIVA";
-
+    public void iniciar() throws PracticasFFEOEException {
+        if (estaActiva()) {
+            throw new PracticasFFEOEException("La práctica ya está activa.");
+        }
+        this.estado = "ACTIVA";
     }
-    public  void finalizar(){
-        this.estado="FINALIZADA";
 
+    public void finalizar() throws PracticasFFEOEException {
+        if (!estaActiva()) {
+            throw new PracticasFFEOEException("La práctica no está activa, no se puede finalizar.");
+        }
+        this.estado = "FINALIZADA";
     }
     public String resumen(){
-        return this.alumno.getNombre()+"  realiza prácticas en "+this.empresa.getNombre()+" ("+this.estado+")";
+        return this.alumno.getNombre()+"  realiza prácticas en "+this.empresa.getNombre()+" ("+this.estado+") ";
     }
+    public long diasDuracion() {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+
+        LocalDate inicio = LocalDate.parse(this.fecha_inicio, formatter);
+        LocalDate fin = LocalDate.parse(this.fecha_fin, formatter);
+
+        return ChronoUnit.DAYS.between(inicio, fin);
+    }
+    public boolean esDelAlumno(String nombreAlumno){
+        if (alumno.getNombre().equalsIgnoreCase(nombreAlumno)){
+            return  true;
+        }
+        else return false;
+    }
+
 }
